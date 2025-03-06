@@ -58,6 +58,7 @@ void lab_2_1_task_2(){
 }
 
 void lab_2_1_task_3(){
+
     static bool button_2_pressed = false; 
     static bool button_3_pressed = false; 
 
@@ -89,6 +90,15 @@ void lab_2_1_task_3(){
         button_3_pressed = false; 
     }
 
-    
+}
+
+void lab_2_1_idle(){
+    printf("Green LED: ");
+    printf(led_green.is_on() ? "ON\n" : "OFF\n");
+    printf("Red LED2: ");
+    printf(led_red.is_on() ? "ON\n" : "OFF\n");
+    printf("Counter: ");
+    printf("%d\n", counter);
+    printf("------------------\n");
 
 }
