@@ -3,18 +3,16 @@
 
 #include <Arduino.h>
 
-void led_init();
-
-void led_on();
-void led_off();
-bool led_is_on();
-
-void led_on_green();
-void led_off_green();
-bool led_is_on_green();
-
-void led_on_red();
-void led_off_red();
-bool led_is_on_red();
+class Led {
+    private:
+        int led_pin;
+    
+    public:
+        Led(int led_pin);
+        void on();
+        void off();
+        bool is_on();
+    };
+    
 
 #endif
