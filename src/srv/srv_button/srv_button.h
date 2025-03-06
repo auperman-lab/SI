@@ -3,7 +3,14 @@
 
 #include <Arduino.h>
 
-void button_init();
-int button_is_pressed();
+class Button{
+    private:
+        int button_pin;
+    
+    public:
+        Button(int button_pin);
+        bool is_pressed();
+};
+
 
 #endif

@@ -1,10 +1,9 @@
 #include "srv_button.h"
 
-#define BUTTON_PIN 10
+Button::Button(int buttonPin): button_pin(buttonPin) {
+    pinMode(buttonPin, INPUT_PULLUP);
+}
 
-void button_init(){
-    pinMode(BUTTON_PIN, INPUT_PULLUP);
-};
-int button_is_pressed(){
-    return digitalRead(BUTTON_PIN) == LOW;
-};
+bool Button::is_pressed() {
+    return digitalRead(button_pin) == LOW;
+}
