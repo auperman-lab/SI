@@ -13,6 +13,8 @@ Button button2(4);
 Button button3(3);
 
 
+int counter = 0;
+
 void lab_2_1_setup(){
     srv_serial_setup();
 
@@ -56,5 +58,37 @@ void lab_2_1_task_2(){
 }
 
 void lab_2_1_task_3(){
+    static bool button_2_pressed = false; 
+    static bool button_3_pressed = false; 
+
+    if (button2.is_pressed())
+    {
+        if (!button_2_pressed)
+        {                                   
+            counter = min(counter+1, 10);
+            button_2_pressed = true;         
+            printf("Increment!");          
+        }
+    }
+    else
+    {
+        button_2_pressed = false;
+    }
+
+    if (button3.is_pressed())
+    { 
+        if (!button_3_pressed)
+        {                                  
+            counter = min(counter-1, 1);
+            button_3_pressed = true;        
+            printf("Decrement!\n");        
+        }
+    }
+    else
+    {
+        button_3_pressed = false; 
+    }
+
+    
 
 }
