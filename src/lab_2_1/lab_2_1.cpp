@@ -3,6 +3,7 @@
 #include "srv/srv_button/srv_button.h"
 #include "srv/srv_led/srv_led.h"
 #include "srv/srv_serial/srv_serial.h"
+#include "timer.h"
 
 Led led_green(10);
 Led led_red(9);
@@ -16,15 +17,16 @@ Button button3(3);
 int counter = 0;
 
 void lab_2_1_setup(){
+    setupTimer();
     srv_serial_setup();
 
     printf("Setup for lab 2.1 done\n");  
 }
 
 void lab_2_1_loop(){
-    printf("Lab 2.1 loop is working");
-    lab_2_1_task_1();
-    delay(1000);
+    timeScheduler();
+    lab_2_1_idle();
+    delay(SYS_TICK*1000);
 }
 
 void lab_2_1_task_1(){
@@ -101,4 +103,29 @@ void lab_2_1_idle(){
     printf("%d\n", counter);
     printf("------------------\n");
 
+}
+
+
+
+void timeScheduler()
+{
+    int dynamicBlinkingLedTaskRec = BLINKING_LED_TASK_REC + (counter * 100);
+
+    if (--buttonLedTaskCounter <= 0)
+    {
+        buttonLedTaskCounter = BUTTON_LED_TASK_REC;
+        lab_2_1_task_1();
+    }
+
+    if (--blinkingLedTaskCounter <= 0)
+    {
+        blinkingLedTaskCounter = dynamicBlinkingLedTaskRec;
+        lab_2_1_task_2();
+    }
+
+    if (--counterButtonsTaskCounter <= 0)
+    {
+        counterButtonsTaskCounter = COUNTER_BUTTONS_TASK_REC;
+        lab_2_1_task_3();
+    }
 }
