@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include "srv/srv_lcd/srv_lcd.h"
 #include "srv/srv_keypad/srv_keypad.h"
-#include "srv/srv_led/led.h" 
+#include "srv/srv_led/srv_led.h" 
 
 
 #define MAX_CODE_LENGTH 5
@@ -12,13 +12,13 @@
 
 char entered_code[MAX_CODE_LENGTH];  
 uint8_t code_index = 0;
+Led led1(1);
 
 
 
 void lab_1_2_setup(){
     lcd_init();
     keypad_init();
-    led_init();
     
     lcd_init();
     printf("Enter Code!");
@@ -33,7 +33,7 @@ void lab_1_2_loop(){
             if (strcmp(entered_code, CORRECT_CODE) == 0) {
                 // Correct code
                 printf("\nCorrect Code!");
-                led_on();  
+                led1.on();  
           
             } else {
                 // Incorrect code

@@ -8,7 +8,7 @@
 
 // #define APP_NAME LAB_1
 // #define APP_NAME LAB_1_1
-#define APP_NAME LAB_1_2
+// #define APP_NAME LAB_1_2
 #define APP_NAME LAB_2_1
 
 
