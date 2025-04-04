@@ -1,35 +1,39 @@
 #include "lab_3_1.h"
 #include "Arduino_FreeRTOS.h"
 #include "srv/srv_lcd/srv_lcd.h"
-#include "srv/srv_humiture/srv_humiture.h"
+#include "srv/srv_potentiometer/srv_potentiometer.h"
 
-Humiture humiture(2);
+Srv_Potentiometer pot(2);
+int potValue = 0;        
+
 
 
 void task_acquire_sensor(void* pvParameters) {
-    while (1) {
-        float temperature = humiture.getTemperature();
-        float humidity = humiture.getHumidity();
+    char buffer[16]; 
 
-        if (temperature != -1 && humidity != -1) {
-            printf("Temp: %.1fC  Hum: %.1f%%\n", temperature, humidity);
-        } else {
-            printf("Sensor read error!\n");
-        }
+    while (1) {
+        int raw = pot.readRaw();
+        potValue = raw;
+
+        snprintf(buffer, sizeof(buffer), "Pot: %4d", potValue);
+        lcd_clear();
+        lcd_print(buffer, 0, 0);  
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 
+
 void task_display_status(void* pvParameters) {
     while (1) {
         lcd_clear();
-        printf("System OK\n");
+        printf("\nSystem OK");
         vTaskDelay(pdMS_TO_TICKS(500)); 
     }
 }
 
 void lab_3_1_setup() {
     lcd_init();
+    pot.begin();
     xTaskCreate(task_acquire_sensor, "Sensor", 1000, NULL, 1, NULL);
     xTaskCreate(task_display_status, "Display", 1000, NULL, 1, NULL);
     vTaskStartScheduler();

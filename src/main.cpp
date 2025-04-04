@@ -18,9 +18,9 @@
 
 
 void setup() {
-  // #if APP_NAME == LAB_1
-  //   lab_1_setup();
-  // #endif
+  #if APP_NAME == LAB_1
+    lab_1_setup();
+  #endif
   // #if APP_NAME == LAB_1_1
   //   lab_1_1_setup();
   // #endif
@@ -33,9 +33,9 @@ void setup() {
   // #if APP_NAME == LAB_2_2
   //   lab_2_2_setup();
   // #endif
-  #if APP_NAME == LAB_3_1
-  lab_3_1_setup();
-#endif
+  // #if APP_NAME == LAB_3_1
+  //   lab_3_1_setup();
+  // #endif
 };
 
 void loop() {
