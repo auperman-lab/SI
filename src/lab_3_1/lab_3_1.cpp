@@ -1,5 +1,6 @@
 #include "lab_3_1.h"
 #include "Arduino_FreeRTOS.h"
+#include <semphr.h>
 #include "srv/srv_lcd/srv_lcd.h"
 #include "srv/srv_potentiometer/srv_potentiometer.h"
 
