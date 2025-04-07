@@ -10,15 +10,15 @@ int potValue = 0;
 
 
 void task_acquire_sensor(void* pvParameters) {
-    char buffer[16]; 
 
     while (1) {
         int raw = pot.readRaw();
         potValue = raw;
-
-        snprintf(buffer, sizeof(buffer), "Pot: %4d", potValue);
         lcd_clear();
-        lcd_print(buffer, 0, 0);  
+        printf("Pot: %d", potValue);  
+        Serial.print("potentiometer valu");
+        Serial.println(potValue);
+
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
@@ -26,13 +26,14 @@ void task_acquire_sensor(void* pvParameters) {
 
 void task_display_status(void* pvParameters) {
     while (1) {
-        lcd_clear();
-        printf("\nSystem OK");
-        vTaskDelay(pdMS_TO_TICKS(500)); 
+        // lcd_clear();
+        printf("System OK");
+        vTaskDelay(pdMS_TO_TICKS(1000)); 
     }
 }
 
 void lab_3_1_setup() {
+    Serial.begin(9600);
     lcd_init();
     pot.begin();
     xTaskCreate(task_acquire_sensor, "Sensor", 1000, NULL, 1, NULL);

@@ -1,7 +1,7 @@
 #include "srv_led.h"
 
 
-Led::Led(int led_pin): led_pin(led_pin) {
+Led::Led(int led_pin): led_pin(led_pin == 0 ? LED_BUILTIN : led_pin) {
     pinMode(led_pin, OUTPUT);
 }
 

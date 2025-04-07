@@ -26,8 +26,8 @@ void commandHandlerTask(void* pvParameters) {
         printf("> ");
 
         while (1) {
-            char c = getchar();  // directly from stdin
-            printf("%c", c);     // echo back
+            char c = getchar();  
+            printf("%c", c);    
 
             if (c == '\n' || c == '\r') {
                 input[index] = '\0';

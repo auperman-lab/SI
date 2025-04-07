@@ -7,7 +7,7 @@
 
 
 Led led_1(11);
-Led led_2(12);
+Led led_2(0);
 
 Button button(5);
 
@@ -78,7 +78,6 @@ void task_2(void *pvParameters){
 
 
     }
-
 }
 
 void task_3(void *pvParameters){
